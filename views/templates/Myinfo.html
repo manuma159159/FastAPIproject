@@ -1,39 +1,13 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>세미 프로젝트-index</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static',path='/css/base.css') }}">
-    <style>
-        /*.text-justify{text-align: justify}*/
-        main div {text-align: center}
-    </style>
-</head>
-<body>
-    <div clss="container">
-        <header><h1>JSP프로젝트 v1</h1></header>
-        <nav>
-
-            <ul class= "list-inline row text-center justify-content-evenly mt-5">
-
-                <li class="col-2">
-                    <a href="/" class="text-decoration-none text-dark">Home</a></li>
-                <li class="col-2">
-                    <a href="/Join" class= "text-decoration-none text-dark">회원가입</a></li>
-                <li class="col-2">
-                    <a href="/login" class="text-decoration-none text-dark">로그인</a></li>
-                <li class="col-2">
-                    <a href="#" class="text-decoration-none text-dark">게시판</a></li>
-                <li class="col-2">
-                    <a href="Myinfo" class="text-decoration-none text-dark">회원정보</a></li>
-            </ul>
-
-
-            <hr>
-
-        </nav>
+{% extends 'base.html' %}
+{% block style %}
+<style>
+    form{width: 365px;margin: 100px auto;}
+    form div{margin-bottom: 5px}
+    form label{font-weight: bold; width: 110px;text-align: right}
+    form button:first-child{margin-left: 135px}
+</style>
+{% endblock %}
+{% block main %}
 
         <main>
             <h2>회원정보</h2>
@@ -47,12 +21,5 @@
             </div>
 
         </main>
-        <hr>
-        <footer>
-            <div class="text-center mb-3">
-                copyright &copy;2014.201.siestageek. AllRights Reserved.
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+
+{% endblock %}
