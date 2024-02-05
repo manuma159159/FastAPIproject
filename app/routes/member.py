@@ -1,17 +1,25 @@
-from fastapi import APIRouter
+from fastapi import APIRouter , Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 
 member_router = APIRouter()
 
-@member_router.get('/join')
-def join():
-    return {'msg':'Hello, Join!'}
+#jinja2 설정
+templates = Jinja2Templates(directory='views/templates')
+member_router.mount('/static',StaticFiles(directory='views/static'), name='static')
+
+@member_router.get('/Join', response_class=HTMLResponse)
+def join(req: Request):
+    return templates.TemplateResponse('Join.html',{'request':req})
+
 
 
 @member_router.get('/login')
-def login():
-    return {'msg':'Hello, login!'}
+def login(req: Request):
+    return templates.TemplateResponse('login.html',{'request':req})
 
 
-@member_router.get('/myinfo')
-def myinfo():
-    return {'msg':'Hello, myinfo!'}
+@member_router.get('/Myinfo')
+def myinfo(req: Request):
+    return templates.TemplateResponse('Myinfo.html',{'request':req})
