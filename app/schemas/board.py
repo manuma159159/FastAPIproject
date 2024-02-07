@@ -9,7 +9,7 @@ class Board(BaseModel):
     userid : str
     regdate : datetime
     views : int
-    content : str
+    contents : str
 
     class Config:
         from_attributes = True
@@ -17,4 +17,4 @@ class Board(BaseModel):
 class NewBoard(BaseModel):
     title : str
     userid : str
-    content : str
+    contents : str
