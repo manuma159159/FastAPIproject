@@ -1,5 +1,5 @@
 from sqlalchemy import insert
-
+from sqlalchemy import select
 from app.models.member import Member
 from app.dbfactory import session
 from app.models.board import Board
@@ -23,3 +23,24 @@ class BoardService():
             sess.commit()
 
         return result
+
+    @staticmethod
+    def select_board():
+
+        with (session() as sess):
+
+            stmt = select(Board.bno,Board.title,Board.userid,
+                          Board.regdate,Board.views).order_by(Board.bno.desc()).offset(0).limit(25)
+            result = sess.execute(stmt)
+
+
+        return result
+
+
+
+
+
+
+
+
+
