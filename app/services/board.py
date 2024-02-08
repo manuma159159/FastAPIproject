@@ -1,4 +1,4 @@
-from sqlalchemy import select, update, insert
+from sqlalchemy import select, update, insert,func
 from app.dbfactory import session
 from app.models.board import Board
 
@@ -28,12 +28,14 @@ class BoardService():
 
         with (session() as sess):
 
+            cnt= sess.query(func.count(Board.bno)).scalar() # 총 게시글 수
+
             stmt = select(Board.bno,Board.title,Board.userid,
                           Board.regdate,Board.views).order_by(Board.bno.desc()).offset(stnum).limit(25)
             result = sess.execute(stmt)
 
 
-        return result
+        return result, cnt
 
     @staticmethod
     def selectone_board(bno):
