@@ -63,7 +63,7 @@
 
     <ul class="pagination justify-content-center m-4">
 <!--        현재 페이지가 1이라면 이전버튼 비활성-->
-        {% if cpg==1  %}<li class="page-item disable">
+        {% if cpg==1  %}<li class="page-item disabled">
         {% else %}<li class="page-item">{%endif%}
 
             <a class="page-link" href="/board/list/{{cpg-1}}">이전</a></li>
@@ -78,7 +78,7 @@
         {% endfor %}
 
         <!--        현재 페이지가 최대(allpage)라면 다음버튼 비활성-->
-        {% if cpg == allpage  %}<li class="page-item disable">
+        {% if cpg == allpage  %}<li class="page-item disabled">
         {% else %}<li class="page-item">{%endif%}
             <a class="page-link" href="/board/list/{{cpg+1}}">다음</a></li>
 
