@@ -35,3 +35,9 @@ def view(req: Request, bno:int):
 
     bd=BoardService.selectone_board(bno)[0]
     return templates.TemplateResponse('board/view.html',{'request':req, 'bd':bd})
+
+@board_router.get('/list')
+def list(req: Request):
+    bdlist = BoardService.select_board()
+    return templates.TemplateResponse(
+        'board/list.html',{'request':req, 'bdlist':bdlist})
