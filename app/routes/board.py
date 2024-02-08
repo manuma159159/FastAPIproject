@@ -28,7 +28,7 @@ board_router.mount('/static',StaticFiles(directory='views/static'), name='static
 def list(req: Request, cpg:int ):
     bdlist = BoardService.select_board(cpg)
     return templates.TemplateResponse(
-        'board/list.html',{'request':req, 'bdlist':bdlist})
+        'board/list.html',{'request':req, 'bdlist':bdlist, 'cpg':cpg})
 
 
 @board_router.get('/write', response_class=HTMLResponse)
