@@ -32,11 +32,11 @@ def writeok(bdto:NewBoard):
 
 @board_router.get('/view/{bno}', response_class=HTMLResponse)
 def view(req: Request, bno:int):
-
     bd=BoardService.selectone_board(bno)[0]
+    BoardService.update_count_board(bno)
     return templates.TemplateResponse('board/view.html',{'request':req, 'bd':bd})
 
-@board_router.get('/list')
+@board_router.get('/list', response_class=HTMLResponse)
 def list(req: Request):
     bdlist = BoardService.select_board()
     return templates.TemplateResponse(
