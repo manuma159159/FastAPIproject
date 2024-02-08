@@ -53,7 +53,8 @@
         <tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th></tr>
 
         {% for bd in bdlist %}
-        <tr><td>{{bd.bno}}</td><td><a href="view">{{bd.title}}</a></td>
+        <tr><td>{{bd.bno}}</td>
+            <td><a href="view/{{ bd.bno }}">{{bd.title}}</a></td>
             <td>{{bd.userid}}</td>
             <td>{{bd.regdate.strftime('%Y-%m-%d')}}</td>
             <td>{{bd.views}}</td></tr>
