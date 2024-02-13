@@ -43,7 +43,8 @@ def list(req: Request, cpg:int ):
     bdlist,cnt = BoardService.select_board(cpg)
     allpage = ceil(cnt/25)
     return templates.TemplateResponse(
-        'board/list.html',{'request':req, 'bdlist':bdlist, 'cpg':cpg, 'stpg':stpg, 'allpage':allpage})
+        'board/list.html',{'request':req, 'bdlist':bdlist, 'cpg':cpg,
+                           'stpg':stpg, 'allpage':allpage, 'baseurl':'/board/list'})
 
 
 
@@ -53,7 +54,8 @@ def find(req: Request, ftype:str, fkey:str, cpg:int):
     bdlist,cnt = BoardService.find_select_board(ftype, '%'+fkey+'%', cpg)
     allpage = ceil(cnt/25)
     return templates.TemplateResponse(
-        'board/list.html',{'request':req, 'bdlist':bdlist, 'cpg':cpg, 'stpg':stpg, 'allpage':allpage})
+        'board/list.html',{'request':req, 'bdlist':bdlist, 'cpg':cpg,
+                           'stpg':stpg, 'allpage':allpage, 'baseurl':f'/board/list/{ftype}/{fkey}'})
 
 
 

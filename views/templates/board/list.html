@@ -76,14 +76,14 @@
             {% if idx<=allpage %}
                 {% if cpg == idx  %}<li class="page-item active">
                 {% else %}<li class="page-item">{%endif%}
-                    <a class="page-link" href="/board/list/{{idx}}">{{idx}}</a></li>
+                    <a class="page-link" href="{{baseurl}}/{{idx}}">{{idx}}</a></li>
             {% endif %}
         {% endfor %}
 
         <!--        현재 페이지가 최대(allpage)라면 다음버튼 비활성-->
         {% if cpg == allpage  %}<li class="page-item disabled">
         {% else %}<li class="page-item">{%endif%}
-            <a class="page-link" href="/board/list/{{cpg+1}}">다음</a></li>
+            <a class="page-link" href="{{baseurl}}/{{cpg+1}}">다음</a></li>
 
     </ul>
 
