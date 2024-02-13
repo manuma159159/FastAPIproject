@@ -96,7 +96,7 @@
     let findbtn=document.querySelector('#findbtn');
     findbtn.addEventListener('click',()=>{
         let ftype=document.querySelector('#ftype').value;
-        let fkey=document.querySelector('fkey').value;
+        let fkey=document.querySelector('#fkey').value;
 
         let params=`/${ftype}/${fkey}/1`;
         let findurl='http://127.0.0.1:8000/board/list'+params;

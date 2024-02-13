@@ -1,4 +1,4 @@
-from sqlalchemy import select, update, insert,func
+from sqlalchemy import select, update, insert,func, or_
 from app.dbfactory import session
 from app.models.board import Board
 
@@ -37,12 +37,10 @@ class BoardService():
         return result, cnt
 
     @staticmethod
-    def find_select_board(ftype, fkey):
-        #stnum=(cpg-1)*25
-        stnum = 0
-        with (session() as sess):
+    def find_select_board(ftype, fkey, cpg):
+        stnum=(cpg-1)*25
 
-            cnt= sess.query(func.count(Board.bno)).scalar() # 총 게시글 수
+        with (session() as sess):
 
             stmt = select(Board.bno,Board.title,Board.userid,
                           Board.regdate,Board.views)
@@ -50,9 +48,12 @@ class BoardService():
             myfilter = Board.title.like(fkey)
             if ftype=='userid':myfilter=Board.userid.like(fkey)
             elif ftype=='contents':myfilter=Board.contents.like(fkey)
+            elif ftype=='titconts':myfilter=or_(Board.title.like(fkey), Board.contents.like(fkey))
             stmt = stmt.filter(myfilter)\
                 .order_by(Board.bno.desc()).offset(stnum).limit(25)
             result = sess.execute(stmt)
+
+            cnt= sess.query(func.count(Board.bno)).filter(myfilter).scalar() # 검색하고 나온 결과물의 총 개수를 위해 뒤에 씀
 
         return result ,cnt
 
