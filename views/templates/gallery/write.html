@@ -51,11 +51,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-auto">
-                <label for="attach" class="col-form-label">이미지파일</label></div>
-            <div class="col-auto"><input type="file" id="attach" name="attach"></div></div>
-        </div>
 
         <div class="row">
             <div class="col-auto">
@@ -63,7 +58,14 @@
                     <i class="bi bi-check"></i>입력완료</button>
                 <button type="reset" class="btn btn-danger">
                     <i class="bi bi-arrow-repeat"></i> 다시입력</button>
-            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-auto">
+                <label for="attach" class="col-form-label">이미지파일</label></div>
+            <div class="col-auto"><input type="file" id="attach" name="attach"></div></div>
+        </div>
         </div>
     </form>
 </main>
@@ -76,7 +78,7 @@
     let galleryfrm = document.galleryfrm;
     writebtn.addEventListener('click', ()=>{
         galleryfrm.method = 'post';
-        galleryfrm.enctype = 'mulipart/form-data';
+        galleryfrm.enctype = 'multipart/form-data';
         galleryfrm.submit();
     })
 </script>
