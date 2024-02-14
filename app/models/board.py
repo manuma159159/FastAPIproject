@@ -17,3 +17,4 @@ class Board(Base):
     views = Column(Integer, default=0)
     contents = Column(Text,nullable=False)
 
+

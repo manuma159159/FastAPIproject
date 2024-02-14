@@ -50,14 +50,14 @@
                 </div>
             </td>
 
-            <td colspan="3"><a href="write" class="btn btn-dark text text-white">글쓰기</a></td>
+            <td colspan="3"><a href="/board/write" class="btn btn-dark text text-white">글쓰기</a></td>
 
         </tr>
         <tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th></tr>
 
         {% for bd in bdlist %}
         <tr><td>{{bd.bno}}</td>
-            <td><a href="view/{{ bd.bno }}">{{bd.title}}</a></td>
+            <td><a href="/board/view/{{ bd.bno }}">{{bd.title}}</a></td>
             <td>{{bd.userid}}</td>
             <td>{{bd.regdate.strftime('%Y-%m-%d')}}</td>
             <td>{{bd.views}}</td></tr>
@@ -69,7 +69,7 @@
         {% if cpg==1  %}<li class="page-item disabled">
         {% else %}<li class="page-item">{%endif%}
 
-            <a class="page-link" href="/board/list/{{cpg-1}}">이전</a></li>
+            <a class="page-link" href="{{baseurl}}/{{cpg-1}}">이전</a></li>
 
         {% for idx in range(stpg,stpg+9+1) %}
 <!--            idx가 allpage 보다 같거나 작으면 페이지네이션 출력-->

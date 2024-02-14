@@ -65,11 +65,16 @@ def find(req: Request, ftype:str, fkey:str, cpg:int):
 def write(req: Request):
     return templates.TemplateResponse('board/write.html',{'request':req})
 
+#구글 recaptcha 확인 url
+# https://www.google.com/recaptcha/api/siteverify?secret=비밀키&response=응답토큰
 @board_router.post('/write')
 def writeok(bdto:NewBoard):
-    result = BoardService.insert_board(bdto)
-    res_url = '/error'
-    if result.rowcount > 0: res_url = '/board/list/1'
+    res_url = '/captcha_error'
+    if BoardService.check_captcha(bdto): #캡챠체크가 true라면 아래가 실행
+        result = BoardService.insert_board(bdto)
+        res_url = '/write_error'
+        if result.rowcount > 0: res_url = '/board/list/1'
+
     return RedirectResponse(res_url, status_code=status.HTTP_302_FOUND)
 
 
