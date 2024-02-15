@@ -4,8 +4,7 @@ from datetime import datetime
 import requests
 from sqlalchemy import select, update, insert,func, or_
 from app.dbfactory import session
-from app.models.gallery import Gallery
-
+from app.models.gallery import Gallery, GalAttach
 
 # 이미지 파일 저장 경로
 UPLOAD_DIR = r'C:\Java\nginx-1.25.3\html\cdn'
@@ -30,6 +29,13 @@ class GalleryService():
             result = sess.execute(stmt)
             sess.commit()
 
+            data = {'fname': fname, 'fsize': fsize,
+                    'gno' : result.inserted_primary_key[0]}
+            print(result.inserted_primary_key)
+            stmt = insert(GalAttach).values(data)
+            result = sess.execute(stmt)
+            sess.commit()
+
         return result
 
 
@@ -49,19 +55,21 @@ class GalleryService():
 
 
 
-    # @staticmethod
-    # def select_board(cpg):
-    #     stnum=(cpg-1)*25
-    #
-    #     with (session() as sess):
-    #
-    #         cnt= sess.query(func.count(Board.bno)).scalar() # 총 게시글 수
-    #
-    #         stmt = select(Board.bno,Board.title,Board.userid,
-    #                       Board.regdate,Board.views).order_by(Board.bno.desc()).offset(stnum).limit(25)
-    #         result = sess.execute(stmt)
-    #
-    #     return result, cnt
+    @staticmethod
+    def select_gallery(cpg):
+        stnum=(cpg-1)*25
+
+        with (session() as sess):
+
+            cnt= sess.query(func.count(Gallery.gno)).scalar() # 총 게시글 수
+
+            stmt = select(Gallery.gno,Gallery.title,Gallery.userid,
+                          Gallery.regdate,Gallery.views, GalAttach.fname)\
+                .join_from(Gallery,GalAttach)\
+                .order_by(Gallery.gno.desc()).offset(stnum).limit(25)
+            result = sess.execute(stmt)
+
+        return result, cnt
 
     # @staticmethod
     # def find_select_board(ftype, fkey, cpg):

@@ -22,10 +22,10 @@ gallery_router.mount('/static',StaticFiles(directory='views/static'), name='stat
 @gallery_router.get('/list/{cpg}', response_class=HTMLResponse)
 def list(req: Request, cpg:int ):
     # stpg = int((cpg -1)/10)*10+1 #stpg = start page / 페이지네이션 시작값
-    # bdlist,cnt = BoardService.select_board(cpg)
+    gallist,cnt = GalleryService.select_gallery(cpg)
     # allpage = ceil(cnt/25)
     return templates.TemplateResponse(
-        'gallery/list.html',{'request':req, 'gallist':None, 'cpg':cpg,
+        'gallery/list.html',{'request':req, 'gallist':gallist, 'cpg':cpg,
                            'stpg':1, 'allpage':1, 'baseurl':'/gallery/list'})
 
 

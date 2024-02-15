@@ -25,13 +25,6 @@
     <h2>갤러리 목록</h2>
     <table class="table table-bordered w-75 container mt-5">
 
-        <colgroup>
-            <col style="width: 10%">
-            <col style="">
-            <col style="width: 15%">
-            <col style="width: 15%">
-            <col style="width: 10%">
-        </colgroup>
         <tr>
             <td colspan="2" class="searchbox">
                 <div class="row">
@@ -53,16 +46,29 @@
             <td colspan="3"><a href="/gallery/write" class="btn btn-dark text text-white">글쓰기</a></td>
 
         </tr>
-        <tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th></tr>
 
-        {% for bd in bdlist %}
-        <tr><td>{{bd.bno}}</td>
-            <td><a href="/board/view/{{ bd.bno }}">{{bd.title}}</a></td>
-            <td>{{bd.userid}}</td>
-            <td>{{bd.regdate.strftime('%Y-%m-%d')}}</td>
-            <td>{{bd.views}}</td></tr>
-        {% endfor%}
         </table>
+
+    <div class="row justify-content-center">
+        {% for gal in gallist %}
+        <div class="col-10 card m-1" style="width: 18rem;">
+            <a href="/gallery/view/{{ gal.gno }}">
+            <img src="http://localhost/cdn/{{gal.fname}}" class="card-img-top" alt="..."><!--이미지--></a>
+
+            <div class="card-body"> <!-- 이거는 이미지 제목이랑 등등-->
+                <h5 class="card-title">{{gal.title}}</h5>
+                <div><span>{{gal.userid}}</span>
+                    <span>{{gal.regdate}}</span>
+                </div>
+                <div>
+                    <span><i class="bi bi-eye"></i>{{gal.views}}</span>
+                </div>
+            </div>
+
+        </div>
+        {%endfor%}
+
+    </div><!-- 갤러리 이미지 리스트 -->
 
     <ul class="pagination justify-content-center m-4">
 <!--        현재 페이지가 1이라면 이전버튼 비활성-->
