@@ -2,6 +2,8 @@ from fastapi import APIRouter , Request, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+from starlette import status
+from starlette.responses import RedirectResponse
 
 from app.schemas.member import NewMember
 from app.services.member import MemberService
@@ -31,6 +33,7 @@ def joinok(req: Request):
 def login(req: Request):
     return templates.TemplateResponse('login.html',{'request':req})
 
+
 @member_router.post('/login')
 def login(req: Request, userid: str = Form(), passwd: str = Form()):
     result = MemberService.check_login(userid, passwd)
@@ -41,6 +44,8 @@ def login(req: Request, userid: str = Form(), passwd: str = Form()):
         return RedirectResponse(url='/myinfo', status_code=status.HTTP_303_SEE_OTHER)
     else:
         return RedirectResponse(url='/login', status_code=status.HTTP_303_SEE_OTHER)
+
+
 @member_router.get('/logout')
 def login(req: Request):
     req.session.clear()   # 생성된 세션객체 제거
@@ -49,4 +54,8 @@ def login(req: Request):
 
 @member_router.get('/myinfo')
 def myinfo(req: Request):
-    return templates.TemplateResponse('Myinfo.html',{'request':req})
+    if 'm' not in req.session:
+        return RedirectResponse(url='/login', status_code=status.HTTP_303_SEE_OTHER)
+
+    myinfo = MemberService.selectone_member(req.session['m'])
+    return templates.TemplateResponse('myinfo.html', {'request': req, 'my':myinfo})

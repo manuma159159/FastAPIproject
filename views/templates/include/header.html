@@ -6,13 +6,19 @@
 
         <li class="col-2">
             <a href="/" class="text-decoration-none text-dark">Home</a></li>
-        <li class="col-2">
-            <a href="/join" class= "text-decoration-none text-dark">회원가입</a></li>
+
+        {% if 'm' in request.session %}
+            <li class="col-2"><a href="# class= text-decoration-none text-dark">회원가입</a></li>
+        {% else %}
+            <li class="col-2"><a href="/join class= text-decoration-none text-dark">회원가입</a></li>
+        {% endif %}
+
         {% if 'm' in request.session %}
             <li class="col-2"><a href="/logout class= text-decoration-none text-dark">로그아웃</a></li>
         {% else %}
             <li class="col-2"><a href="/login class= text-decoration-none text-dark">로그인</a></li>
         {% endif %}
+
         <li class="col-2">
             <a href="/board/list/1" class="text-decoration-none text-dark">게시판</a></li>
         <li class="col-2">
