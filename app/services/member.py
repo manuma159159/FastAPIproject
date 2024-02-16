@@ -34,3 +34,13 @@ class MemberService():
                 return result
 
         return None
+
+
+    @staticmethod
+    def selectone_member(userid):
+        with session() as sess:
+            # Member테이블에서 아이디로 회원 조회후
+            result = sess.query(Member).filter_by(userid=userid).scalar()
+            return result
+
+

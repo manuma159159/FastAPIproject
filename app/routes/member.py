@@ -59,3 +59,4 @@ def myinfo(req: Request):
 
     myinfo = MemberService.selectone_member(req.session['m'])
     return templates.TemplateResponse('myinfo.html', {'request': req, 'my':myinfo})
+# myinfo 부분은 5차에
