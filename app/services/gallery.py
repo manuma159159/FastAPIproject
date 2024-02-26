@@ -7,7 +7,8 @@ from app.dbfactory import session
 from app.models.gallery import Gallery, GalAttach
 
 # 이미지 파일 저장 경로
-UPLOAD_DIR = r'C:\Java\nginx-1.25.3\html\cdn'
+# UPLOAD_DIR = r'C:\Java\nginx-1.25.3\html\cdn' (윈도우용)
+UPLOAD_DIR = r'/usr/share/nginx/html/cdn'
 
 
 class GalleryService():

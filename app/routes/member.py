@@ -12,11 +12,11 @@ member_router = APIRouter()
 
 #jinja2 설정
 templates = Jinja2Templates(directory='views/templates')
-member_router.mount('/static',StaticFiles(directory='views/static'), name='static')
+#member_router.mount('/static',StaticFiles(directory='views/static'), name='static')
 
 @member_router.get('/join', response_class=HTMLResponse)
 def join(req: Request):
-    return templates.TemplateResponse('Join.html',{'request':req})
+    return templates.TemplateResponse('join.html',{'request':req})
 
 @member_router.post('/join')
 def joincheck(mdto: NewMember):
